@@ -196,7 +196,7 @@ TfLiteStatus EdgeTpuManagerDirect::SetVerbosity(int verbosity) {
 std::string EdgeTpuManagerDirect::Version() const {
   StdMutexLock lock(&mutex_);
 
-  absl::string_view build_label = BuildData::BuildLabel();
+  std::string build_label = BuildData::BuildLabel();  // cannot be absl::string_view because absl::StrFormat doesn't support that
   // Note that runtime version reported here is correct only if all driver
   // providers are built at the same time with this compile unit.
   if (build_label.empty()) {
